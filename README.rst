@@ -5,9 +5,7 @@ This is a pythonic currency converter API
 Currency data sources
 ---------------------
 
-The default source is the `European Central Bank <http://www.ecb.int/>`_. This is the ECB historical rates for 42 currencies against the Euro since 1999.
-It can be downloaded here: `eurofxref-hist.zip <http://www.ecb.int/stats/eurofxref/eurofxref-hist.zip>`_.
-The converter can use different sources as long as the format is the same.
+The exchange rate source in use is the `European Central Bank <https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml>`_.
 
 
 Installation
