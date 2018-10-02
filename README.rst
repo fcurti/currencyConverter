@@ -38,7 +38,11 @@ The convert currency AP entry point
 http://localhost:8080/convert
  
 HTTP Parameters
+
 amount :: the amount to be converted
+
 src_currency :: the amount's currency
+
 dest_currency :: the currency to convert the amount
+
 reference_date :: the reference date for the currency exchange rate
