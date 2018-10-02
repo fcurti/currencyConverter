@@ -35,9 +35,8 @@ else:
         return d.values()
 
 
-#_DIRNAME = op.realpath(op.dirname(__file__))
-#CURRENCY_FILE = op.join(_DIRNAME, 'eurofxref-hist.zip')
-CURRENCY_FILE="/home/fcurti/eclipse-workspace/currencyConverter/src/eurofxref-hist.zip"
+_DIRNAME = op.realpath(op.dirname(__file__))
+CURRENCY_FILE = op.join(_DIRNAME, 'eurofxref-hist.zip')
 
 Bounds = namedtuple('Bounds', 'first_date last_date')
 
@@ -143,6 +142,7 @@ class CurrencyConverter(object):
         self.currencies = None
 
         if currency_file is not None:
+            print("currency file is %s" %(currency_file))
             self.load_file(currency_file)
 
     def load_file(self, currency_file):
