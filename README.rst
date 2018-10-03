@@ -52,27 +52,26 @@ HTTP Parameters
 
 Some use cases
 
-.. code-block:: bash
 
-  Convert 1 EUR in USD with today exchange rate
-  
-  http://localhost:8080/convert?amount=1
+Convert 1 EUR in USD with today exchange rate
 
-  Convert 1 EUR in USD using the exchange rate of 2010-09-28
-  
-  http://localhost:8080/convert?amount=1&src_currency=EUR&dest_currency=USD&reference_date=2018-09-28
+http://localhost:8080/convert?amount=1
 
-  Date bad format
-  
-  http://localhost:8080/convert?amount=10&src_currency=EUR&dest_currency=USD&reference_date=228
+Convert 1 EUR in USD using the exchange rate of 2010-09-28
 
-  Currency does not exist
-  
-  http://localhost:8080/convert?amount=10&src_currency=FL&dest_currency=BRR
+http://localhost:8080/convert?amount=1&src_currency=EUR&dest_currency=USD&reference_date=2018-09-28
 
-  No exchange rate for the provided date
-  
-  http://localhost:8080/convert?amount=10&src_currency=EUR&dest_currency=USD&reference_date=2010-09-25
+Date bad format
+
+http://localhost:8080/convert?amount=10&src_currency=EUR&dest_currency=USD&reference_date=228
+
+Currency does not exist
+
+http://localhost:8080/convert?amount=10&src_currency=FL&dest_currency=BRR
+
+No exchange rate for the provided date
+
+http://localhost:8080/convert?amount=10&src_currency=EUR&dest_currency=USD&reference_date=2010-09-25
 
 
 
