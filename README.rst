@@ -7,7 +7,7 @@ Currency data sources
 
 The exchange rate source in use is the `European Central Bank <https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml>`_.
 
-It contains the last 90s days exchange rate.
+It contains the last 90s days exchange rate, refreshed each day.
 
 
 Installation
