@@ -38,6 +38,17 @@ The convert currency entry point
 
   http://localhost:8080/convert
 
+HTTP Parameters
+
+.. code-block:: bash
+
+	amount :: the amount to be converted (mandatory)
+
+	src_currency :: the amount's currency (default EUR)
+
+	dest_currency :: the currency to convert the amount (default USD)
+
+	reference_date :: the reference date for the currency exchange rate in YYYY-MM-DD format ( default is today)
 
 Some use cases
 
@@ -64,13 +75,5 @@ Some use cases
   http://localhost:8080/convert?amount=10&src_currency=EUR&dest_currency=USD&reference_date=2010-09-25
 
 
-HTTP Parameters
 
-amount :: the amount to be converted (mandatory)
-
-src_currency :: the amount's currency (default EUR)
-
-dest_currency :: the currency to convert the amount (default USD)
-
-reference_date :: the reference date for the currency exchange rate in YYYY-MM-DD format ( default is today)
   
