@@ -11,33 +11,39 @@ from platform import python_version
 from currencyConverter.currency_converter import CurrencyConverter
 from currencyConverter.currency_converter import RateNotFoundError
 
+CURRENCY_FILE = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml'
+
 class currencyConverterServer(object):
 	
 	def __init__(self,c):
 		self.converter=c
+		self.converterDate=datetime.now().strftime("%Y-%m-%d");
 
 	@cherrypy.expose
 	def index(self):
 		out= """<html>
           <head></head>
           <body>
-			PYVERSION: %s
-            <form method="get" action="convert">
-              <input type="text" value="8" name="amount" />
-              <button type="submit">CONVERT EUR IN USD</button>
-            </form>
+			<h1>This is a pythonic currency converter API using cherryPy, just for fun.</h1>
+			<p>PYVERSION: %s</p>
+			<p><b><a href="http://localhost:8080/convert?amount=1">TRY THE API</a></b></p>
           </body>
         </html>"""
 
 		return out %(python_version())
 		
 	@cherrypy.expose
-	def convert(self, amount=0, src_currency="EUR", dest_currency="USD", reference_date=datetime.now().strftime("%y-%m-%d")):
+	def convert(self, amount=0, src_currency="EUR", dest_currency="USD", reference_date=datetime.now().strftime("%Y-%m-%d")):
 		status='good'
 		message='converted'
 		amountConverted=0
 
 		try:
+			
+			# automatic update every day
+			if(datetime.now().strftime("%Y-%m-%d") != self.converterDate ):
+				self.updateCurrencyDict()
+				
 			if not amount.strip():
 				raise ValueError('amount parameter cannot be empty')
 			
@@ -57,9 +63,14 @@ class currencyConverterServer(object):
 			}
 			cherrypy.response.headers['Content-Type'] = 'application/json'			
 			return json.dumps(ret).encode('utf8')
+		
+	def updateCurrencyDict(self):
+		cherrypy.expose=False
+		self.converter = CurrencyConverter(CURRENCY_FILE)
+		
 
-def main():
-	c = CurrencyConverter('http://www.ecb.int/stats/eurofxref/eurofxref-hist.zip')
+def main():	
+	c = CurrencyConverter(CURRENCY_FILE)
 	#cConverter = CurrencyConverter('https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml')	
 	cherrypy.quickstart(currencyConverterServer(c))
 

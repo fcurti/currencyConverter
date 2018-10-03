@@ -12,6 +12,9 @@ from collections import defaultdict, namedtuple
 from zipfile import ZipFile
 from io import BytesIO
 
+# xml parser utils
+from xml.dom import minidom
+
 # We could have used "six", but like this we have no dependency
 if sys.version_info[0] < 3:
     range = xrange
@@ -34,14 +37,12 @@ else:
     def itervalues(d):
         return d.values()
 
-
-_DIRNAME = op.realpath(op.dirname(__file__))
-CURRENCY_FILE = op.join(_DIRNAME, 'eurofxref-hist.zip')
+# default exchange rate resource
+CURRENCY_FILE = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml'
 
 Bounds = namedtuple('Bounds', 'first_date last_date')
 
 __all__ = ['CurrencyConverter',
-           'S3CurrencyConverter',
            'RateNotFoundError', ]
 
 
@@ -142,38 +143,35 @@ class CurrencyConverter(object):
         self.currencies = None
 
         if currency_file is not None:
-            print("currency file is %s" %(currency_file))
-            self.load_file(currency_file)
+            print("INFO: currency file is %s" %(currency_file))
+            self.load_currency(currency_file)
+            exit
 
-    def load_file(self, currency_file):
+    def load_currency(self, currency_file):
         """To be subclassed if alternate methods of loading data.
         """
-        if currency_file.startswith(('http://', 'https://')):
-            content = urlopen(currency_file).read()
-        else:
-            with open(currency_file, 'rb') as f:
-                content = f.read()
-
-        if currency_file.endswith('.zip'):
-            self.load_lines(get_lines_from_zip(content))
-        else:
-            self.load_lines(content.decode('utf-8').splitlines())
-
-    def load_lines(self, lines):
         _rates = self._rates = defaultdict(dict)
         na_values = self.na_values
-
-        lines = iter(lines)
-        header = next(lines).strip().split(',')[1:]
-
-        for line in lines:
-            line = line.strip().split(',')
-            date = parse_date(line[0])
-            for currency, rate in zip(header, line[1:]):
-                currency = currency.strip()
+        
+        content = urlopen(currency_file).read()        
+        xmldoc = minidom.parseString(content.decode('utf-8'))
+        itemlist = xmldoc.getElementsByTagName('Cube')
+        
+        for item in itemlist:
+            if item.hasAttribute('time'):
+                date = parse_date(item.attributes['time'].value)
+                
+            if item.hasAttribute('currency'):
+                currency = item.attributes['currency'].value
+                               
+            if item.hasAttribute('rate'):
+                rate = item.attributes['rate'].value                
+                
                 if rate not in na_values and currency:  # skip empty currency
                     _rates[currency][date] = float(rate)
-
+            else:
+                pass
+            
         self.currencies = set(self._rates) | set([self.ref_currency])
         self._compute_bounds()
 
@@ -322,19 +320,3 @@ class CurrencyConverter(object):
         r1 = self._get_rate(new_currency, date)
 
         return float(amount) / r0 * r1
-
-
-class S3CurrencyConverter(CurrencyConverter):
-    """
-    Load the ECB CSV file from an S3 key instead of from a local file.
-    The first argument should be an instance of boto.s3.key.Key (or any other
-    object that provides a get_contents_as_string() method which returns the
-    CSV file as a string).
-    """
-    def __init__(self, currency_file, **kwargs):
-        """Make currency_file a required attribute"""
-        super(S3CurrencyConverter, self).__init__(currency_file, **kwargs)
-
-    def load_file(self, currency_file):
-        lines = currency_file.get_contents_as_string().splitlines()
-        self.load_lines(lines)
