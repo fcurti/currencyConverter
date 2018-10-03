@@ -42,32 +42,24 @@ The convert currency entry point
 Some use cases
 
   Convert 1 EUR in USD with today exchange rate
-
   http://localhost:8080/convert?amount=1
 
   Convert 1 EUR in USD using the exchange rate of 2010-09-28
-
   http://localhost:8080/convert?amount=1&src_currency=EUR&dest_currency=USD&reference_date=2018-09-28
 
   Date bad format
-
   http://localhost:8080/convert?amount=10&src_currency=EUR&dest_currency=USD&reference_date=228
 
   Currency does not exist
-
   http://localhost:8080/convert?amount=10&src_currency=FL&dest_currency=BRR
 
   No exchange rate for the provided date
-
   http://localhost:8080/convert?amount=10&src_currency=EUR&dest_currency=USD&reference_date=2010-09-25
 
 
 HTTP Parameters
 
   amount :: the amount to be converted (mandatory)
-
   src_currency :: the amount's currency (default EUR)
-
   dest_currency :: the currency to convert the amount (default USD)
-
   reference_date :: the reference date for the currency exchange rate in YYYY-MM-DD format ( default is today)
