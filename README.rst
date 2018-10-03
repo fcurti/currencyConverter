@@ -36,7 +36,7 @@ API reference
  
 The convert currency entry point
 
-  http://localhost:8080/convert
+http://localhost:8080/convert
 
 HTTP Parameters
 
