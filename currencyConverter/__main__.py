@@ -49,8 +49,6 @@ class currencyConverterServer(object):
 			
 			if not reference_date:
 				reference_date=self.converter.bounds[dest_currency].last_date.strftime('%Y-%m-%d')
-			
-			print("REF DATE:" +reference_date)
 				
 			amountConverted=self.converter.convert(amount, src_currency, dest_currency, datetime.strptime(reference_date, '%Y-%m-%d').date())
 			#cherrypy.response.headers['Content-Type'] = 'application/json'	
@@ -63,6 +61,7 @@ class currencyConverterServer(object):
 			ret={
 				"amount": amountConverted,
 				"currency": dest_currency,
+				"exchangeCurrencyDate": reference_date,
 				"status": status,
 				'message': message
 			}
