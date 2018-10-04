@@ -33,7 +33,7 @@ class currencyConverterServer(object):
 		return out %(python_version())
 		
 	@cherrypy.expose
-	def convert(self, amount=0, src_currency="EUR", dest_currency="USD", reference_date=datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')):
+	def convert(self, amount=0, src_currency="EUR", dest_currency="USD", reference_date=''):
 		status='success'
 		message='amount converted'
 		amountConverted=0
@@ -47,6 +47,11 @@ class currencyConverterServer(object):
 			if not amount.strip():
 				raise ValueError('amount parameter cannot be empty')
 			
+			if not reference_date:
+				reference_date=self.converter.bounds[dest_currency].last_date.strftime('%Y-%m-%d')
+			
+			print("REF DATE:" +reference_date)
+				
 			amountConverted=self.converter.convert(amount, src_currency, dest_currency, datetime.strptime(reference_date, '%Y-%m-%d').date())
 			#cherrypy.response.headers['Content-Type'] = 'application/json'	
 			#return json.dumps(ret).encode('utf8')
