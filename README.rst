@@ -58,7 +58,7 @@ HTTP Parameters
 * amount :: the amount to be converted (mandatory)
 * src_currency :: the amount's currency (default EUR)
 * dest_currency :: the currency to convert the amount (default USD)
-* reference_date :: the reference date for the currency exchange rate in YYYY-MM-DD format ( default is today)
+* reference_date :: the reference date for the currency exchange rate in YYYY-MM-DD format ( default is yesterday )
 
 Some use cases
 
@@ -116,7 +116,18 @@ UNIT TEST
 
 Unit test are implemented in unitTest.py.
 
-Run unit test typing the following
+Assertion:
+
+webServerRunning
+  check if webServer is up & running
+  
+amountConverted
+  check if the amount has been converted
+
+badCurrency
+  check if the provided src_currency is supported
+  
+Run unit test typing the following, using python version 3.6
 
 .. code-block:: bash
  
