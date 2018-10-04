@@ -9,7 +9,9 @@ Currency data sources
 
 The exchange rate source in use is the `European Central Bank <https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml>`_.
 
-It contains the last 90s days exchange rate, refreshed each day.
+It contains the last 90s days exchange rate.
+
+The webapp dynamically retrieve the latest xml file at project startup time and reload the exchange rate resource each day automatically during the 1st daily user GET.
 
 
 Installation
