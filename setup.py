@@ -17,7 +17,7 @@ setup(
     author='Fabio Curti',
     author_email='fabio.curti@gmail.com',
     url='https://github.com/fcurti/currencyConverter',
-    description='A pythonic currency converter.',
+    description='A pythonic currency converter with Docker containerization and unit test',
     long_description=LONG_DESCRIPTION,
     license=LICENSE,
     packages=find_packages(),
