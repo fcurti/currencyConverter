@@ -21,7 +21,7 @@ The webapp dynamically retrieve the latest xml file at project startup time and 
 Installation
 ------------
 
-You can install directly after cloning:
+You can install directly after cloning typing git clone https://github.com/fcurti/currencyConverter on your fileSystem :
 
 .. code-block:: bash
 
