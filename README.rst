@@ -2,12 +2,16 @@
 
 This is a pythonic currency converter REST API using cherryPy, just for fun.
 
+Python 3.6 certified.
+
 Currency data sources
 ---------------------
 
 The exchange rate source in use is the `European Central Bank <https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml>`_.
 
-It contains the last 90s days exchange rate, refreshed each day.
+It contains the last 90s days exchange rate.
+
+The webapp dynamically retrieve the latest xml file at project startup time and reload the exchange rate resource each day automatically during the 1st daily user GET.
 
 
 Installation
@@ -22,7 +26,14 @@ You can install directly after cloning:
  
 Run WebServer
 ------------
- 
+
+The python setup.py install the currencyConverter script in your home.
+To be sure it runs please add ~.local/bin to the PATH
+
+.. code-block:: bash
+
+  $ export PATH=${PATH}:~.local/bin
+
 .. code-block:: bash
  
   $ currencyConverter
@@ -40,12 +51,10 @@ http://localhost:8080/convert
 
 HTTP Parameters
 
-.. code-block:: bash
-
-	amount :: the amount to be converted (mandatory)
-	src_currency :: the amount's currency (default EUR)
-	dest_currency :: the currency to convert the amount (default USD)
-	reference_date :: the reference date for the currency exchange rate in YYYY-MM-DD format ( default is today)
+* amount :: the amount to be converted (mandatory)
+* src_currency :: the amount's currency (default EUR)
+* dest_currency :: the currency to convert the amount (default USD)
+* reference_date :: the reference date for the currency exchange rate in YYYY-MM-DD format ( default is today)
 
 Some use cases
 
@@ -71,5 +80,30 @@ No exchange rate for the provided date
 http://localhost:8080/convert?amount=10&src_currency=EUR&dest_currency=USD&reference_date=2010-09-25
 
 
+DOCKER
+------
 
+You may also run the currencyConverter API using docker.
+
+Build the Docker image using the following command
+
+.. code-block:: bash
+ 
+  $ docker build -t fcurti/currencyconverter .
+	
+Run container
+
+.. code-block:: bash
+ 
+  $ docker run -tid -p 8080:8080 --name="currency_converter" fcurti/currencyconverter
+  
+Open browser @ this url
+
+http://localhost:8080/convert?amount=1
+
+Logs
+
+.. code-block:: bash
+
+  $ docker logs currency_converter
   
