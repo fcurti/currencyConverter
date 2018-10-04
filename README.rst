@@ -61,12 +61,12 @@ HTTP Parameters
 * amount :: the amount to be converted (mandatory)
 * src_currency :: the amount's currency (default EUR)
 * dest_currency :: the currency to convert the amount (default USD)
-* reference_date :: the reference date for the currency exchange rate in YYYY-MM-DD format ( default is yesterday )
+* reference_date :: the reference date for the currency exchange rate in YYYY-MM-DD format ( default is the last currency exchange date available )
 
 Some use cases
 
 
-Convert 1 EUR in USD with yesterday exchange rate
+Convert 1 EUR in USD with the last date available currency exchange rate
 
 http://localhost:8080/convert?amount=1
 
