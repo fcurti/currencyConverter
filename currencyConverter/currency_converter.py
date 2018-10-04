@@ -240,7 +240,12 @@ class CurrencyConverter(object):
             if self.verbose:
                 print(('{0}: filling {1} missing rate using {2} ({3}d old) and '
                        '{4} ({5}d later)').format(currency, date, r0, d0, r1, d1))
-
+    def _is_valid_currency(self,c):
+        if c not in self.currencies:
+            raise ValueError('{0} is not a supported currency'.format(c))
+        else:
+            return True        
+        
     def _get_rate(self, currency, date):
         """Get a rate for a given currency and date.
 
