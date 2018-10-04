@@ -87,13 +87,13 @@ Build the Docker image using the following command
 
 .. code-block:: bash
  
-  docker build -t fcurti/currencyconverter .
+  $ docker build -t fcurti/currencyconverter .
 	
 Run container
 
 .. code-block:: bash
  
-  docker run -tid -p 8080:8080 --name="currency_converter" fcurti/currencyconverter
+  $ docker run -tid -p 8080:8080 --name="currency_converter" fcurti/currencyconverter
   
 Open browser @ this url
 
@@ -103,5 +103,5 @@ Logs
 
 .. code-block:: bash
 
-  sudo docker logs currency_converter
+  $ docker logs currency_converter
   
