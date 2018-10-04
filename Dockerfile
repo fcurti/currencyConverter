@@ -14,9 +14,7 @@ WORKDIR /var/www/webapp
 
 ENV PYTHONPATH "${PYTHONPATH}:/var/www/webapp/currencyConverter"
 
-ENTRYPOINT ["python3", "setup.py", "install", "--user"]
 ENTRYPOINT ["python3", "currencyConverter"]
-
 
 
 # BUILD
