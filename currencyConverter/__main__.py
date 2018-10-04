@@ -6,7 +6,7 @@ import cherrypy
 import random
 import string
 import json
-from datetime import datetime
+from datetime import datetime,timedelta
 from platform import python_version
 from currencyConverter.currency_converter import CurrencyConverter
 from currencyConverter.currency_converter import RateNotFoundError
@@ -33,9 +33,9 @@ class currencyConverterServer(object):
 		return out %(python_version())
 		
 	@cherrypy.expose
-	def convert(self, amount=0, src_currency="EUR", dest_currency="USD", reference_date=datetime.now().strftime("%Y-%m-%d")):
-		status='good'
-		message='converted'
+	def convert(self, amount=0, src_currency="EUR", dest_currency="USD", reference_date=datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')):
+		status='success'
+		message='amount converted'
 		amountConverted=0
 
 		try:
@@ -52,7 +52,7 @@ class currencyConverterServer(object):
 			#return json.dumps(ret).encode('utf8')
 		except (RateNotFoundError,ValueError) as e:
 			amountConverted=''
-			status='error'
+			status='failed'
 			message=str(e)
 		finally:
 			ret={
@@ -71,7 +71,8 @@ class currencyConverterServer(object):
 
 def main():	
 	c = CurrencyConverter(CURRENCY_FILE)
-	#cConverter = CurrencyConverter('https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml')	
+	#cConverter = CurrencyConverter('https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml')
+	cherrypy.config.update({'server.socket_host': '0.0.0.0'})
 	cherrypy.quickstart(currencyConverterServer(c))
 
 
