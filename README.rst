@@ -121,6 +121,10 @@ Logs
 
   $ docker logs currency_converter
   
+  or using docker-compose
+  
+  $ docker-compose logs
+  
 UNIT TEST
 ---------
 
