@@ -91,11 +91,19 @@ DOCKER
 
 You may also run the currencyConverter API using docker.
 
-Build the Docker image using the following command
+Using docker-compose as follow
+
+.. code-block:: bash
+
+  $ docker-compose up --build
+
+Or 
+
+build the Docker image using the following command
 
 .. code-block:: bash
  
-  $ docker build -t fcurti/currencyconverter .
+ $ docker build -t fcurti/currencyconverter .
 	
 Run container
 
