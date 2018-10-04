@@ -20,7 +20,6 @@ class testCurrencyConverter(unittest.TestCase):
         try:
             u=urlopen(self.url) 
             rc = u.getcode()
-            print ("webServer is running!")
         except HTTPError as e:
             print('The server couldn\'t fulfill the request.')
             print('Error code: ', e.code)
@@ -35,7 +34,7 @@ class testCurrencyConverter(unittest.TestCase):
         res={"status":"failed"}
         
         values = {'amount' : 1}
-        
+                
         print ("*** start unitTest amountConverted ***")
         
         try:
@@ -55,7 +54,7 @@ class testCurrencyConverter(unittest.TestCase):
         res={"status":"failed"}
         
         values = {'amount' : 1, "src_currency":"BAD"}
-        
+                
         print ("*** start unitTest badCurrency ***")
         
         try:
@@ -67,8 +66,8 @@ class testCurrencyConverter(unittest.TestCase):
                 res=json.loads(response.read().decode('utf-8'))                
         except:
             print("Error")
-        finally:                    
-            self.assertEqual(res['status'], 'success', 'amount has not been converted, ' + res['message'])
+        finally:
+            self.assertEqual(res['status'], 'failed', 'amount has not been converted, ' + res['message'])
 
 def suite():
     suite = unittest.TestSuite()
