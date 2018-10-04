@@ -53,11 +53,10 @@ class currencyConverterServer(object):
 				if self.converter._is_valid_currency(dest_currency):
 					reference_date=self.converter.bounds[dest_currency].last_date.strftime('%Y-%m-%d')
 				else:
-					raise ValueError('{0} is not a supported currency'.format(c))
+					raise ValueError('{0} is not a supported currency'.format(dest_currency))
 				
 			amountConverted=self.converter.convert(amount, src_currency, dest_currency, datetime.strptime(reference_date, '%Y-%m-%d').date())
-			#cherrypy.response.headers['Content-Type'] = 'application/json'	
-			#return json.dumps(ret).encode('utf8')
+
 		except (RateNotFoundError,ValueError) as e:
 			amountConverted=''
 			if reference_date is None:
@@ -83,7 +82,6 @@ class currencyConverterServer(object):
 
 def main():	
 	c = CurrencyConverter(CURRENCY_FILE)
-	#cConverter = CurrencyConverter('https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml')
 	cherrypy.config.update({'server.socket_host': '0.0.0.0'})
 	cherrypy.quickstart(currencyConverterServer(c))
 
