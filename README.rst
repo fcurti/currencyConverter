@@ -47,12 +47,10 @@ http://localhost:8080/convert
 
 HTTP Parameters
 
-.. code-block:: bash
-
-	amount :: the amount to be converted (mandatory)
-	src_currency :: the amount's currency (default EUR)
-	dest_currency :: the currency to convert the amount (default USD)
-	reference_date :: the reference date for the currency exchange rate in YYYY-MM-DD format ( default is today)
+* amount :: the amount to be converted (mandatory)
+* src_currency :: the amount's currency (default EUR)
+* dest_currency :: the currency to convert the amount (default USD)
+* reference_date :: the reference date for the currency exchange rate in YYYY-MM-DD format ( default is today)
 
 Some use cases
 
