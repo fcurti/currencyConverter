@@ -1,0 +1,8 @@
+# docker-compose.yml
+server:
+  build: .
+  ports:
+    - "8080:8080"
+  environment: 
+    TZ: Europe/Rome
+  container_name: currency_converter
