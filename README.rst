@@ -66,7 +66,7 @@ HTTP Parameters
 Some use cases
 
 
-Convert 1 EUR in USD with today exchange rate
+Convert 1 EUR in USD with yesterday exchange rate
 
 http://localhost:8080/convert?amount=1
 
