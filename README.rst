@@ -1,12 +1,12 @@
 .. image:: https://raw.githubusercontent.com/fcurti/currencyconverter/master/logo/logo.png
 
 This is a pythonic currency converter REST API using cherryPy, just for fun.
-
 The REST API is Dockerized using the provided Dockerfile.
-
 Automated test is powered by python unittest suite.
 
-Python 3.6 certified.
+The CurrencyConverter class is inspired to another git project with some customization in order to digest an exchange rate source in XML format. The time to market has been improved in this way.
+
+WebApp and unitTest are Python 3.6 certified.
 
 Currency data sources
 ---------------------
