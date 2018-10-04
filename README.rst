@@ -22,7 +22,14 @@ You can install directly after cloning:
  
 Run WebServer
 ------------
- 
+
+The python setup.py install the currencyConverter script in your home.
+To be sure it runs please add ~.local/bin to the PATH
+
+.. code-block:: bash
+
+  $ export PATH=${PATH}:~.local/bin
+
 .. code-block:: bash
  
   $ currencyConverter
@@ -71,5 +78,30 @@ No exchange rate for the provided date
 http://localhost:8080/convert?amount=10&src_currency=EUR&dest_currency=USD&reference_date=2010-09-25
 
 
+DOCKER
+------
 
+You may also run the currencyConverter API using docker.
+
+Build the Docker image using the following command
+
+.. code-block:: bash
+ 
+  docker build -t fcurti/currencyconverter .
+	
+Run container
+
+.. code-block:: bash
+ 
+  docker run -tid -p 8080:8080 --name="currency_converter" fcurti/currencyconverter
+  
+Open browser @ this url
+
+http://localhost:8080/convert?amount=1
+
+Logs
+
+.. code-block:: bash
+
+  sudo docker logs currency_converter
   
