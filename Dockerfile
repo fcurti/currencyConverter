@@ -7,13 +7,17 @@ RUN pip install cherrypy
 
 RUN mkdir -p /var/www/webapp
 
-COPY setup.py README.rst LICENSE /var/www/webapp/
+COPY setup.py /var/www/webapp/
 ADD currencyConverter /var/www/webapp/currencyConverter
 
 WORKDIR /var/www/webapp
 
+ENV PYTHONPATH "${PYTHONPATH}:/var/www/webapp/currencyConverter"
+
 ENTRYPOINT ["python3", "setup.py", "install", "--user"]
 ENTRYPOINT ["python3", "currencyConverter"]
+
+
 
 # BUILD
 # sudo docker build -t fcurti/currencyconverter .
