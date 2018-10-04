@@ -2,6 +2,10 @@
 
 This is a pythonic currency converter REST API using cherryPy, just for fun.
 
+The REST API is Dockerized using the provided Dockerfile.
+
+Automated test is powered by python unittest suite.
+
 Python 3.6 certified.
 
 Currency data sources
@@ -106,4 +110,15 @@ Logs
 .. code-block:: bash
 
   $ docker logs currency_converter
+  
+UNIT TEST
+---------
+
+Unit test are implemented in unitTest.py.
+
+Run unit test typing the following
+
+.. code-block:: bash
+ 
+  $ python unitTest.py
   
