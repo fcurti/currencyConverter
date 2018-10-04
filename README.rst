@@ -46,7 +46,7 @@ To be sure it runs please add $HOME/.local/bin on your PATH env.
   $ currencyConverter
 
   with log redirection
-  $ currencyConverter > ./log/currencyConverter.log 2>&1 &
+  $ mkdir log && currencyConverter > ./log/currencyConverter.log 2>&1 &
   
   
 API reference
