@@ -153,7 +153,7 @@ class CurrencyConverter(object):
         _rates = self._rates = defaultdict(dict)
         na_values = self.na_values
         
-        content = urlopen(currency_file).read()        
+        content = urlopen(currency_file).read()
         xmldoc = minidom.parseString(content.decode('utf-8'))
         itemlist = xmldoc.getElementsByTagName('Cube')
         
