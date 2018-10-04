@@ -2,6 +2,8 @@
 
 This is a pythonic currency converter REST API using cherryPy, just for fun.
 
+Python 3.6 certified.
+
 Currency data sources
 ---------------------
 
