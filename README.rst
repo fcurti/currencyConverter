@@ -38,7 +38,7 @@ To be sure it runs please add ~.local/bin to the PATH
 
 .. code-block:: bash
 
-  $ export PATH=${PATH}:~.local/bin
+  $ export PATH=${PATH}:$HOME/.local/bin
 
 .. code-block:: bash
  
