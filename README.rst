@@ -34,7 +34,7 @@ Run WebServer
 ------------
 
 The python setup.py install the currencyConverter script in your home.
-To be sure it runs please add ~.local/bin to the PATH
+To be sure it runs please add $HOME/.local/bin to the PATH
 
 .. code-block:: bash
 
