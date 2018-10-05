@@ -2,7 +2,7 @@
 
 This is a pythonic currency converter REST API using cherryPy, just for fun.
 
-The REST API could be containerized using the provided Dockerfile or using docker-compose.
+The REST API can be containerized using the provided Dockerfile or using docker-compose.
 
 Automated test is powered by python unittest suite.
 
