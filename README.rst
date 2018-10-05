@@ -1,6 +1,6 @@
 .. image:: https://raw.githubusercontent.com/fcurti/currencyconverter/master/logo/logo.png
 
-This is a pythonic currency converter REST API using cherryPy, just for fun.
+This is a pythonic currency converter REST API using cherryPy.
 
 The REST API can be containerized using the provided Dockerfile or using docker-compose.
 
